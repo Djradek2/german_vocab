@@ -1,0 +1,13 @@
+main {width: 50%; margin: 50px auto; text-align: center;}
+table,th, td {border-collapse: collapse;border: 1px solid #000;}
+th, td {padding: 5px;}
+table {margin: 50px auto;width: 100%;}
+form {margin-top: 10px;}
+div.back{text-align: left;margin: auto; width: 100%;}
+section{display: flex;flex-direction: row;}
+article{font-size: 18px;}
+article.notfirst{margin-left: 16px;}
+article.last{margin: auto;}
+button.last{font-size: 20px;}
+td.short{margin: auto;width: 20px;text-align: center;vertical-align: middle;}
+input{width: 40px; margin-left: 4px;}

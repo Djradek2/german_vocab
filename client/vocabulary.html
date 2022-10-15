@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>German Vocabulary</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='main.css'>
+</head>
+<body>
+<main>
+    <div class="back">
+    <form>
+        <section>
+            <article>Options:</article>
+            <article class="notfirst">
+            <input type="radio" name="convert" id="toEng" value="0">
+            <label for="toEng">Show German</label><br>
+            <input type="radio" name="convert" id="toGerman" value="1">
+            <label for="toGerman">Show English</label><br>
+            <input type="radio" name="convert" id="both" value="2" checked>
+            <label for="both">Both</label><br>
+            </article>
+            <article class="notfirst">
+                <input type="radio" name="pick" id="freq" value="0" checked>
+                <label for="freq">Pick by frequency</label><br>
+                <input type="radio" name="pick" id="mist" value="1">
+                <label for="mist">Pick by mistakes</label><br>
+                <input type="radio" name="pick" id="rand" value="2">
+                <label for="rabd">Pick randomly</label><br>
+            </article>
+            <article class="notfirst">
+                <button type="button" onclick="select100()">Select 100</button><br>
+                <button type="button" onclick="wordRange()">Select range</button><input id="input1" min="1" value="1" type="number"> to<input id="input2" min="1" value="2" type="number"><br>
+                <button type="button" onclick="selectAll()">Select all</button> <button type="button" onclick="remove()">Clear</button>
+            </article>
+            <article class="last">
+                <button class="last" type="submit">Save</button>
+            </article>
+        </section>
+        <table id="table">
+            <thead>
+                <th>ID</th>
+                <th>German</th>
+                <th>English</th>
+                <th>Frequency</th>
+                <th>Context</th>
+                <th>Select</th>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </form>
+</div>
+</main>
+<script src="vocabulary.js"></script>
+</body>
+</html>
