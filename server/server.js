@@ -11,26 +11,52 @@ app.use(express.urlencoded({ extended : false }));
 
 //const db = dbService.getDbServiceInstance();
 
+function randomWord(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 app.post('/get', (request, response) => {  
     const db = dbService.getDbServiceInstance();
     var name = request.body;
 
     var convert = name.convert;
     var pick = name.pick;
-    var hmm = (Object.keys(name)).slice(2);
-    var ids = [];
-    var add = "";
-    for(i=1;i<10;i++){                   //doing this automatically needs to wait for a promise 
-        try{
-        add = ("id_" + i);
-        ids.push(name.id_1);
-        }
-        catch{}
+    var ids = (Object.keys(name)).slice(2);
+    var many = ids.length;
+
+
+    if ((convert == 0) && (pick==0)){
+
     }
-    console.log(hmm);
-    const result = db.getLine("2");
+    else if ((convert == 0) && (pick==1)){
+        
+    }
+    else if ((convert == 0) && (pick==2)){
+        var id = (ids[randomWord(0, many-1)]).slice(3);
+    }
+    else if ((convert == 1) && (pick==0)){
+        
+    }
+    else if ((convert == 1) && (pick==1)){
+        
+    }
+    else if ((convert == 1) && (pick==2)){
+        var id = ids[randomWord(0, many-1)].slice(3);
+        
+    }
+    else if ((convert == 2) && (pick==0)){;
+
+    }
+    else if ((convert == 2) && (pick==1)){
+        
+    }
+    else if ((convert == 2) && (pick==2)){
+        var id = ids[randomWord(0, many-1)].slice(3);
+    }
+    //console.log(id);
+    const result = db.getLine(id);
     result
-    .then(word => response.json({word: word}))
+    .then(word => response.json({word : word}))
     .catch(err => console.log(err));
 });
 
