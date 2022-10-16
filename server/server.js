@@ -12,11 +12,23 @@ app.use(express.urlencoded({ extended : false }));
 //const db = dbService.getDbServiceInstance();
 
 app.post('/get', (request, response) => {  
-    var name = request.body;
-    name = name.lol;
-    //console.log(name);   
     const db = dbService.getDbServiceInstance();
-    const result = db.getLine(name);
+    var name = request.body;
+
+    var convert = name.convert;
+    var pick = name.pick;
+    var hmm = (Object.keys(name)).slice(2);
+    var ids = [];
+    var add = "";
+    for(i=1;i<10;i++){                   //doing this automatically needs to wait for a promise 
+        try{
+        add = ("id_" + i);
+        ids.push(name.id_1);
+        }
+        catch{}
+    }
+    console.log(hmm);
+    const result = db.getLine("2");
     result
     .then(word => response.json({word: word}))
     .catch(err => console.log(err));
@@ -26,7 +38,6 @@ app.get('/getAll', (request, response) => {         //function for getting all S
     const db = dbService.getDbServiceInstance();
     
     const result = db.getAllData();
-
     result
     .then(data => response.json({data : data}))
     .catch(err => console.log(err));

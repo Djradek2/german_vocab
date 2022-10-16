@@ -50,8 +50,22 @@ class DbService{
                     resolve(result);
                 }) 
             });
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
-            //console.log(response);
+    async howMany(){
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT COUNT(*) FROM words;";
+                        connection.query(query, (err, result) => {
+                        if (err) reject(new Error(err.message));
+                        resolve(result);
+                    }) 
+            });
             return response;
         }
         catch (error) {

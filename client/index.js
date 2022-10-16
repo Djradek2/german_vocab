@@ -24,6 +24,7 @@ function startup(){
         var test = JSON.parse(localStorage.getItem('settings'));
         console.log(test.convert);
         console.log(test.pick);
+        //console.log(Object.keys(test)[0]);
     }
     catch{
         localStorage.setItem("settings", defaultSettings);
