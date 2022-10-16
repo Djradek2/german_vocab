@@ -24,7 +24,7 @@ class DbService{
     }
 
     async getLine(name){
-        console.log(name);
+        //console.log(name);
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "SELECT * FROM `words` WHERE id=(?);"

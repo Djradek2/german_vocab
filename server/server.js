@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended : false }));
 app.post('/get', (request, response) => {  
     var name = request.body;
     name = name.lol;
-    console.log(name);   
+    //console.log(name);   
     const db = dbService.getDbServiceInstance();
     const result = db.getLine(name);
     result
