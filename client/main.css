@@ -1,4 +1,4 @@
-main {width: 50%; margin: 50px auto; text-align: center;}
+main {width: 50%; margin: 50px auto; text-align: center; background-color: lightgreen;}
 table,th, td {border-collapse: collapse;border: 1px solid #000;}
 th, td {padding: 5px;}
 table {margin: 50px auto;width: 100%;}
@@ -15,3 +15,4 @@ input.word{width: 150px;margin: auto;}
 p{font-size: 36px;}
 button.left{float: left;font-size: 16px;margin-left: 50px;}
 button.right{float: right;font-size: 16px;margin-right: 50px;}
+p.score{font-size: 24px;}

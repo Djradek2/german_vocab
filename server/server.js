@@ -69,6 +69,10 @@ app.get('/getAll', (request, response) => {         //function for getting all S
     .catch(err => console.log(err));
 });
 
+/* app.post('/correct'), (request, response) => {
+
+} */
+
 app.post('/send', (request, response) => {
     var name = request.body;
 });

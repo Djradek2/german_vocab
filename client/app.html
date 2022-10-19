@@ -15,9 +15,10 @@
     <form action="index.html">
         <button class="left">Quit</button>
     </form>
-    <input class="word" type="text" id ="name-input" autofocus>
-    <button id="add-name-btn">Send</button> 
-    <button onclick="show()" class="right">Skip</button>
+    <input class="word" type="text" id ="word-input" autofocus>
+    <button id="check-btn" onclick="check()">Send</button> 
+    <button onclick="show()" class="right">Skip</button><br><br>
+    <p class="score" id="score">score: 0/0 (nan%)</p>
 </main>
 <script src="app.js"></script>
 </body>
