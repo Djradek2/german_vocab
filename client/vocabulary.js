@@ -2,7 +2,37 @@ document.addEventListener("DOMContentLoaded", function(){
     fetch('http://localhost:5000/getAll')
     .then(response => response.json())
     .then(data => loadHTMLTable(data['data']));
+
+
+    var settings = JSON.parse(localStorage.getItem("settings"));
+    switch(settings.convert) {
+        case "0":
+            document.getElementById("toEng").checked = true;
+            break;
+        case "1":
+            document.getElementById("toGerman").checked = true;
+            break;
+        case "2":
+            document.getElementById("both").checked = true;
+    }
 });
+
+function loadChecks(){
+    var settings = JSON.parse(localStorage.getItem("settings"));
+    
+    for(var i = 1;i<(Object.keys(settings).length);i++){
+        try{
+            var text = "id_" + String(i);
+            if (settings[text] == "selected"){  //(settings.id_2) == (var text = "id_2"; settings[text])
+                document.getElementById(String(i)).checked = true;
+            }
+            else{
+                document.getElementById(String(i)).checked = false;
+            }
+        }
+        catch{}
+    }
+}
 
 function handleSubmit(event) {
     event.preventDefault();                             //prevents default behaviour (restarting site)
@@ -51,6 +81,7 @@ function loadHTMLTable(data){
     });
 
     table.innerHTML = tableHtml;
+    loadChecks();
 }
 
 function wordRange(){

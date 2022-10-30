@@ -1,7 +1,8 @@
 const display = document.querySelector('#p1');
 var settings = JSON.parse(localStorage.getItem('settings'));
-const input = document.getElementById("word-input");
+const inputField = document.getElementById("word-input");
 const checkButton = document.getElementById("check-btn");
+const scoreBoard = document.getElementById('score');
 var totalScore = 0;
 var correctScore = 0;
 var latestWord;
@@ -11,6 +12,13 @@ document.addEventListener("DOMContentLoaded", function(){
     loadScore();
     show();
 });
+
+document.addEventListener("keypress", function(event){
+    if (event.key === "Enter") {
+        event.preventDefault();
+        checkButton.click();
+    }
+})
 
 function randomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -61,8 +69,8 @@ function show(){
 }
 
 function check(){
-    answer = input.value;
-    input.value = "";
+    answer = inputField.value;
+    inputField.value = "";
     totalScore++;
     if(settings.convert == 0){
         if (answer == latestWord.English){
@@ -88,18 +96,29 @@ function check(){
             correctScore++;
         }
     }
-    console.log(correctScore + " / " + totalScore);
     show();
+    showWinrate();
+    saveScore();
 }
 
 function showWinrate(){
-
+    scoreBoard.innerHTML = "score: " + correctScore + " / " + totalScore + " (" + (correctScore/totalScore*100).toFixed(2) + "%)"; 
 }
 
 function saveScore(){
-
+    localStorage.setItem("score", JSON.stringify({"correct": correctScore, "total": totalScore}));
 }
 
 function loadScore(){
+    try{
+    var scoreSave = JSON.parse(localStorage.getItem('score'));
+    totalScore = scoreSave.total;
+    correctScore = scoreSave.correct;
+    }
+    catch{}
+    showWinrate();
+}
+
+function clearScore(){
     
 }
