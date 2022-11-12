@@ -31,3 +31,11 @@ function startup(){
     }
     window.location.replace("app.html")
 }
+
+function clearScore(){
+    if (confirm("Are you sure you want to reset the score?")) {
+        localStorage.removeItem("score");
+      } else {
+        
+      }
+}

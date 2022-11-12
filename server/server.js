@@ -1,4 +1,5 @@
 const express = require('express');
+const sessions = require('express-session')
 const app = express();
 const cors = require('cors');
 const env = require('dotenv');
@@ -8,6 +9,11 @@ env.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
+app.use(sessions({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
 
 //const db = dbService.getDbServiceInstance();
 
@@ -22,8 +28,8 @@ app.post('/get', (request, response) => {
     var convert = name.convert;
     var pick = name.pick;
     var ids = (Object.keys(name)).slice(2);
-    var many = ids.length;
-
+    var many = ids.length; 
+    var id = "null";
 
     if ((convert == 0) && (pick==0)){
 
@@ -32,7 +38,7 @@ app.post('/get', (request, response) => {
         
     }
     else if ((convert == 0) && (pick==2)){
-        var id = (ids[randomWord(0, many-1)]).slice(3);
+        id = (ids[randomWord(0, many-1)]).slice(3);
     }
     else if ((convert == 1) && (pick==0)){
         
@@ -41,8 +47,7 @@ app.post('/get', (request, response) => {
         
     }
     else if ((convert == 1) && (pick==2)){
-        var id = ids[randomWord(0, many-1)].slice(3);
-        
+        id = ids[randomWord(0, many-1)].slice(3);
     }
     else if ((convert == 2) && (pick==0)){;
 
@@ -51,9 +56,9 @@ app.post('/get', (request, response) => {
         
     }
     else if ((convert == 2) && (pick==2)){
-        var id = ids[randomWord(0, many-1)].slice(3);
+        id = ids[randomWord(0, many-1)].slice(3);
     }
-    //console.log(id);
+    console.log(id);
     const result = db.getLine(id);
     result
     .then(word => response.json({word : word}))

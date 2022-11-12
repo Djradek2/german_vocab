@@ -7,6 +7,7 @@ var totalScore = 0;
 var correctScore = 0;
 var latestWord;
 var rand;
+var oldWord = "null";
 
 document.addEventListener("DOMContentLoaded", function(){
     loadScore();
@@ -26,24 +27,33 @@ function randomNum(min, max) {
 
 function displayWord(data){
     const display = document.querySelector('#p1'); 
-
     var word = JSON.parse((JSON.stringify(data.word)).slice(1, -1));
-    latestWord = word;
+    if(latestWord == undefined){
+        latestWord = word;
+    }
     console.log(word);
+    console.log(latestWord);
+    if((word.English == latestWord.English) && (Object.keys(settings).length > 3)){         //sussy
+        show();
+    }
+    else{
+        latestWord = word;
+        //console.log(word);
 
-    if(settings.convert == 0){
-        display.innerHTML = word.German;
-    }
-    else if (settings.convert == 1){
-        display.innerHTML = word.English;
-    }
-    else if (settings.convert == 2){
-        rand = randomNum(1,2);
-        if(rand == 1){
+        if(settings.convert == 0){
             display.innerHTML = word.German;
         }
-        else{
+        else if (settings.convert == 1){
             display.innerHTML = word.English;
+        }
+        else if (settings.convert == 2){
+            rand = randomNum(1,2);
+            if(rand == 1){
+                display.innerHTML = word.German;
+            }
+            else{
+                display.innerHTML = word.English;
+            }
         }
     }
 }

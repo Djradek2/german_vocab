@@ -1,3 +1,5 @@
+var numberOfWords;
+
 document.addEventListener("DOMContentLoaded", function(){
     fetch('http://localhost:5000/getAll')
     .then(response => response.json())
@@ -17,10 +19,10 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 });
 
-function loadChecks(){
+function loadChecks(){  //loads localStorage into html
     var settings = JSON.parse(localStorage.getItem("settings"));
     
-    for(var i = 1;i<(Object.keys(settings).length);i++){
+    for(var i = 1;i<numberOfWords+1;i++){    //(Object.keys(settings).length)
         try{
             var text = "id_" + String(i);
             if (settings[text] == "selected"){  //(settings.id_2) == (var text = "id_2"; settings[text])
@@ -58,6 +60,7 @@ form.addEventListener('submit', handleSubmit);
 function loadHTMLTable(data){
     const table = document.querySelector("table tbody");
     console.log(data);
+    numberOfWords = data.length;
 
     if (data.length === 0){
         table.innerHTML = "<tr><td class = 'no-data' colspan='5'>No Data</td></tr>";
@@ -67,17 +70,13 @@ function loadHTMLTable(data){
     data.forEach(function ({id, German, English, Frequency, Context}) {
         tableHtml += "<tr>";
         tableHtml += `<td>${id}</td>`;
-        tableHtml += `<td>${German}</td>`;
-        tableHtml += `<td>${English}</td>`;
+        tableHtml += `<td id="id_${id}_ger">${German}</td>`;
+        tableHtml += `<td id="id_${id}_eng">${English}</td>`;
         tableHtml += `<td>${Frequency}</td>`;
         tableHtml += `<td>${Context}</td>`;
-        if(id < 101){
-            tableHtml += `<td class="short"><input type="checkbox" name="id_${id}" checked value="selected" id=${id} data-id=${id}></td>`;
-        }
-        else{
-            tableHtml += `<td class="short"><input type="checkbox" name="id_${id}" value="selected" id=${id} data-id=${id}></td>`;
-        }
+        tableHtml += `<td class="short"><input type="checkbox" name="id_${id}" value="selected" id=${id} data-id=${id}></td>`;  //you can add checked
         tableHtml += "</tr>";
+        //numberOfWords++;
     });
 
     table.innerHTML = tableHtml;
@@ -122,6 +121,21 @@ function remove(){
         for(i = 1; i<100000; i++){
             var checkbox = document.getElementById(i);
             checkbox.checked = false;
+        }
+    }
+    catch{}
+}
+
+function samewords(){
+    try{
+        for(i = 1; i<100000; i++){
+            var selectWord1 = "id_" + i + "_ger"
+            var selectWord2 = "id_" + i + "_eng"
+            //console.log(document.getElementById(selectWord1).innerHTML);
+            if(document.getElementById(selectWord1).innerHTML == document.getElementById(selectWord2).innerHTML){
+                var checkbox = document.getElementById(i);
+                checkbox.checked = false;
+            }
         }
     }
     catch{}
